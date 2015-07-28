@@ -5,7 +5,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>seedream | 꿈을 향한 미래 농업, 씨드림과 함께</title>
+	<title>seedream | 꿈을 향한 미래 농업, d씨드림과 함께</title>
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -66,7 +66,7 @@
 							<li><a class="submenuLink">IoF</a></li>
 						</ul>
 					</li>
-					<li><a class="menuLink"><span>스마트팜</span></a></li>
+					<li><a class="menuLink"><span>스마트팜d</span></a></li>
 					<li>
 						<a class="menuLink"><span>LoK서비스</span></a>
 						<ul>

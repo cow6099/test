@@ -5,7 +5,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>seedream | 꿈을 향한 미래 농업, 씨드림과 함께</title>
+	<title>seedream | 꿈을 향한 미래 농업, 씨s드림과 함께</title>
 	<link rel="stylesheet" href="css/style.css" />
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />

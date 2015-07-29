@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>seedream | 꿈을 향한 미래 농업, 씨드림과 함께</title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <style>
+ 
+        html, body, #map_canvas {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                          [Header] 최상단 메뉴
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->        
+    <header>
+        <div class="header-top">
+            <div class="header-inner">
+                <div class="header-top-inner">
+                    <a href="http://www.dankook.ac.kr/" target="_blank">단국대학교</a>
+                    <a href="http://www.dankook.ac.kr/" target="_blank">IOF사업단</a>
+                    <a href="http://www.msip.go.kr/" target="_blank">미래창조과학부</a>
+                </div>
+            </div>
+        </div>
+        
+        
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                         [Nav] 상단 네비게이션 바(div : nav-inner)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+        <nav>
+            <div class="nav-inner">
+                <a href="./index.html"><img src="images/als-images/logo_m.jpg" width="190" height="38" alt="seedream" /></a>
+                <ul>
+                    <li>
+                        <a id="imgmargin" class="menuLink"><span>씨드림소개</span></a>
+                        <ul>
+                            <li><a href="#">씨드림소개</a></li>
+                            <li><a href="#">비젼</a></li>
+                            <li><a href="#">IoF</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="menuLink"><span>스마트팜</span></a></li>
+                    <li>
+                        <a class="menuLink"><span>LoK서비스</span></a>
+                        <ul>
+                            <li><a href="#">LoK서비스</a></li>
+                            <li><a href="#">생육환경가이드라인</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="menuLink"><span>재배 가이드</span></a></li>
+                    <li><a class="menuLink"><span>엘리트 귀농</span></a></li>
+                    <li><a class="menuLink"><span>공지사항</span></a></li>
+                    <li><a class="menuLink" href="video.html"><span>동영상</span></a></li>
+                    <li><a class="menuLink" href="GeioLocation.html"><span>현재위치</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>   
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                   YOUTUBE 동영상
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<script>
+//<![CDATA[
+ 
+    bind(window, 'load', function () {
+        geolocationInit();
+    });
+ 
+    // 이벤트 할당
+    function bind(elem, type, handler, capture) {
+        type = typeof type === 'string' && type || '';
+        handler = handler || function () { ; };
+ 
+        if (elem.addEventListener) {
+            elem.addEventListener(type, handler, capture);
+        }
+        else if (elem.attachEvent) {
+            elem.attachEvent('on' + type, handler);
+        }
+ 
+        return elem;
+    };
+ 
+ 
+ 
+    function geolocationInit() {
+ 
+        if (navigator.geolocation) {
+            var geo = navigator.geolocation;
+            geo.getCurrentPosition(function (pos) {
+                // 위도
+                //alert(pos.coords.latitude);
+                // 경도
+                //alert(pos.coords.longitude);
+                // 정확도
+                //alert(pos.coords.accuracy);
+                // 마지막 업데이트 시간(초)
+                //alert(pos.timestamp);
+ 
+                // google map 연동
+                mapInit(pos.coords.latitude, pos.coords.longitude);
+ 
+            }, function (e) {
+                msg({
+                    0: '위치 정보 검색에 문제가 있습니다.(msg:' + e.message + ')',
+                    1: '현재 페이지에서 사용자가 위치 정보 검색을 거부했습니다.',
+                    2: '브라우저가 위치정보를 검색하지 못했습니다.(msg:' + e.message + ')',
+                    3: '브라우저의 위치 정보 검색 시간이 초과됐습니다.'
+                }[e.code]);
+ 
+            }, {
+                enableHeighAccuracy: false,
+                timeout: 10000,
+                maximumAge: 0
+            });
+ 
+            /*
+ 
+            var watchid = geo.watchCurrentPosition(updatecallback, errorcallback, opt): 위치정보검색을 반복한다.
+            geo.clearWatch(watchid): 위치정보검색 반복을 중지한다.
+ 
+            enableHeighAccuracy: HTML5 지오로케이션 서비스가 고도 정확도 감지모드를 사용할 수 있는지 여부를 브라우저에게 알려준다.
+            하지만 이 기능을 활성화하면 위치를 파악하느라 더 많은 시간과 전력이 소모된다.(기본값: false)
+ 
+            timeout: 위치 정보를 계산하는 시간을 의미하며, 정의된 시간이 넘어가면 에러를 발생시킨다.
+ 
+            maximumAge: 현 위치 정보에 대한 만료시간을 정의합니다.
+ 
+ 
+ 
+ 
+            */
+        }
+        else {
+            alert('HTML 5 지오로케이션을 지원하지 않는 브라우저입니다.');
+        }
+    }
+ 
+    function msg(msg) {
+        alert(msg);
+    }
+ 
+ 
+    function mapInit(latitude, longitude) {
+        
+        var opt = {
+            scrollwheel: false,
+            zoom: 19,
+            center: new google.maps.LatLng(latitude, longitude),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        var map = new google.maps.Map(document.getElementById('map_canvas'), opt);
+        var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(latitude, longitude),
+                map: map,
+                title: "현재위치"
+            });
+
+    };
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<div id="map_canvas"></div>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                     Footer
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+    <body onload="initialize()">
+            <footer id="footer" class="footer">
+            <div class="footer-inner">
+                <img id="imgmargin" src="images\als-images\Seedream_logo_b.jpg" alt="seedream" title="seedreamlogo" />
+                <address>
+                    <p>경기도 용인시 수지구 죽전로 152 단국대학교 서관 206호 씨드림  사업자 등록번호 : 142-81-83736</p>
+                    <p>대표 : 정재진 | TEL :031)8005-2498 | FAX : 031)8021-7429</p>
+                    <p>&copy; 2015 seedream. All rights reserved.</p>
+                <address>
+            </div>
+        </footer>
+        <a href="#" id="arrow-top"><i class="fa fa-long-arrow-up"></i></a>
+        
+    </body>
+</body>
+</html>
+
